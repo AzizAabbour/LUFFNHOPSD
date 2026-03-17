@@ -130,6 +130,7 @@ input, textarea {
 .font-bold { font-weight: 700; }
 .font-extrabold { font-weight: 800; }
 
+.overflow-hidden { overflow: hidden; }
 .hidden { display: none; }
 @media (min-width: 768px) {
   .md-flex { display: flex; }

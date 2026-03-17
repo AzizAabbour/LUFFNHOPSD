@@ -13,8 +13,8 @@ gsap.registerPlugin(ScrollTrigger);
 const packages = [
   {
     name: 'Standard',
-    price: '$80',
-    features: ['5 Thumbnails', 'High Quality Design', 'Source Files', '2 Revisions'],
+    price: '$$$',
+    features: ['1 Thumbnails', '2 Revisions'],
     featured: false,
     btnStyle: 'btn-outline',
     message: encodeURIComponent(

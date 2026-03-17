@@ -28,7 +28,7 @@ export default function Loader({ onComplete }) {
     <div ref={containerRef} className="loader-container">
       <img
         ref={logoRef}
-        src="/logo/m-logo-whaite.png"
+        src={`${import.meta.env.BASE_URL}logo/m-logo-whaite.png`}
         alt="Logo"
         className="loader-logo"
       />

@@ -84,7 +84,7 @@ export default function Navbar() {
         {/* Logo */}
         <a href="#hero" className="flex items-center gap-3 relative z-110">
           <img
-            src="/logo/m-logo-whaite.png"
+            src={`${import.meta.env.BASE_URL}logo/m-logo-whaite.png`}
             alt="Ali Logo"
             style={{ height: '50px', width: 'auto', objectFit: 'contain' }}
           />

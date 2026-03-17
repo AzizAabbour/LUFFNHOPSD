@@ -6,6 +6,7 @@ import {
   ChatBubbleIcon,
   ArrowRightIcon,
 } from '@radix-ui/react-icons';
+import Aurora from './Aurora';
 
 export default function Hero() {
   const heroRef = useRef(null);
@@ -79,7 +80,15 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="hero" ref={heroRef} className="hero overflow-hidden">
+    <section id="hero" ref={heroRef} className="hero overflow-hidden relative">
+      <div className="absolute inset-0 z-0 opacity-40">
+        <Aurora
+          colorStops={["#a32388", "#b19eef", "#5227ff"]}
+          blend={0.5}
+          amplitude={1.0}
+          speed={1}
+        />
+      </div>
       {/* Animated Background Orbs */}
       <div
         ref={orb1Ref}
@@ -136,7 +145,7 @@ export default function Hero() {
             </p>
             <h1 className="hero-title">
               Hey, I&apos;m{' '}
-              <span>Ali</span>
+              <span>LUFFNHO</span>
               <br />
               <span className="hero-subtitle-text">
                 Thumbnail Designer
@@ -202,7 +211,7 @@ export default function Hero() {
         <div ref={imageRef} className="hero-img-wrapper" style={{ opacity: 0 }}>
           <div className="hero-img-glow" />
           <img
-            src="/mypic/m-pfp.jpg"
+            src={`${import.meta.env.BASE_URL}mypic/m-pfp.jpg`}
             alt="Ali"
             className="hero-img"
           />

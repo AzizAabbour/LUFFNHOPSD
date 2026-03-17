@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
 import ScrollToTop from './components/ScrollToTop';
 
+
 export default function App() {
   const [loading, setLoading] = useState(true);
 
@@ -49,6 +50,7 @@ export default function App() {
     <>
       <CustomCursor />
       <ScrollToTop />
+
       {loading && <Loader onComplete={handleLoaderComplete} />}
       <div
         className={`app-container ${loading ? 'loading' : 'loaded'}`}

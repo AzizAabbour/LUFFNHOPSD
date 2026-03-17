@@ -12,7 +12,7 @@ export default function Footer() {
           {/* Logo & tagline */}
           <div className="footer-logo-area">
             <img
-              src="/logo/m-logo-whaite.png"
+              src={`${import.meta.env.BASE_URL}logo/m-logo-whaite.png`}
               alt="Ali Logo"
               style={{ height: '50px', width: 'auto', objectFit: 'contain' }}
             />
@@ -55,7 +55,23 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="footer-bottom">
           <p className="footer-copy">
-            © {new Date().getFullYear()} Ali - All rights reserved - CréoLab-Web.
+            © {new Date().getFullYear()} LUFFNHOPSD - All rights reserved -{' '}By{' '}{' '}  
+            <a
+              href="https://www.instagram.com/creolabweb?igsh=MXF4eXV3Nmg2NnRweA%3D%3D&utm_source=qr"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: '#a32388',
+                textDecoration: 'none',
+                fontWeight: 'bold',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px',
+              }}
+            >
+            <InstagramLogoIcon width={16} height={16} /> CréoLab-Web 
+            </a>
+            
           </p>
         </div>
       </div>

@@ -4,34 +4,27 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const base = import.meta.env.BASE_URL;
+
 const row1Images = [
-  '/Youtube/redesigne-1.jpg',
-  '/Youtube/redesigne-2.jpg',
-  '/Youtube/redesigne-3.jpg',
-  '/Youtube/redesigne-4.jpg',
-  '/Youtube/redesigne-5.jpg',
-  '/Youtube/redesigne-6.jpg',
-  '/Youtube/redesigne-8.jpg',
-  '/Youtube/redesigne-9.jpg',
-  '/Youtube/challenge.jpg',
-  '/Youtube/hansi.jpg',
-  '/Youtube/trump.jpg',
-  '/Youtube/thumbnail-gts.jpg',
+  `${base}Youtube/challenge .jpg`,
+  `${base}Youtube/challenge.jpg`,
+  `${base}Youtube/hansi.jpg`,
+  `${base}Youtube/redesigne-1.jpg`,
+  `${base}Youtube/redesigne-2.jpg`,
+  `${base}Youtube/redesigne-3.jpg`,
+  `${base}Youtube/redesigne-4.jpg`,
+  `${base}Youtube/redesigne-5.jpg`,
 ];
 
 const row2Images = [
-  '/Youtube/redesigne-10-v1.jpg',
-  '/Youtube/redesigne-10-v2.jpg',
-  '/Youtube/redesigne-12.jpg',
-  '/Youtube/redesigne-13-.jpg',
-  '/Youtube/redesigne-14.jpg',
-  '/Youtube/redesigne-basket.jpg',
-  '/Youtube/redesigne-blayer.jpg',
-  '/Youtube/redesigne-dollar.jpg',
-  '/Youtube/redesinge-fort.jpg',
-  '/Youtube/the-last-day.jpg',
-  '/Youtube/thumbn-trad.jpg',
-  '/Youtube/redesigne-7.png',
+  `${base}Youtube/redesigne-6.jpg`,
+  `${base}Youtube/redesigne-8.jpg`,
+  `${base}Youtube/redesigne-10-v1.jpg`,
+  `${base}Youtube/redesigne-10-v2.jpg`,
+  `${base}Youtube/redesigne-12.jpg`,
+  `${base}Youtube/redesigne-13-.jpg`,
+  `${base}Youtube/redesigne-14.jpg`,
 ];
 
 export default function YoutubeShowcase() {
