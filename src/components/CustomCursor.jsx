@@ -34,8 +34,8 @@ export default function CustomCursor() {
     const onMouseEnterLink = () => {
       gsap.to(cursor, {
         scale: 1.5,
-        backgroundColor: 'rgba(163, 35, 136, 0.1)',
-        borderColor: '#A32388',
+        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        borderColor: '#ffffff',
         duration: 0.3,
       });
     };
@@ -44,7 +44,7 @@ export default function CustomCursor() {
       gsap.to(cursor, {
         scale: 1,
         backgroundColor: 'transparent',
-        borderColor: 'rgba(163, 35, 136, 0.4)',
+        borderColor: 'rgba(255, 255, 255, 0.4)',
         duration: 0.3,
       });
     };
@@ -53,7 +53,7 @@ export default function CustomCursor() {
     window.addEventListener('mousedown', onMouseDown);
     window.addEventListener('mouseup', onMouseUp);
 
-    const links = document.querySelectorAll('a, button, .insta-card, .carousel-item');
+    const links = document.querySelectorAll('a, button, .insta-card, .carousel-item, .feature-card, .price-card, .review-card');
     links.forEach((link) => {
       link.addEventListener('mouseenter', onMouseEnterLink);
       link.addEventListener('mouseleave', onMouseLeaveLink);
@@ -74,12 +74,11 @@ export default function CustomCursor() {
     <>
       <div
         ref={cursorRef}
-        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-[rgba(163,35,136,0.4)] pointer-events-none z-[10000] -translate-x-1/2 -translate-y-1/2 hidden md:block"
-        style={{ mixBlendMode: 'difference' }}
+        className="cursor-ring"
       />
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 w-1 h-1 bg-[#A32388] rounded-full pointer-events-none z-[10000] -translate-x-1/2 -translate-y-1/2 hidden md:block"
+        className="cursor-dot"
       />
     </>
   );

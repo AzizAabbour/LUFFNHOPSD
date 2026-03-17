@@ -5,9 +5,12 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import YoutubeShowcase from './components/YoutubeShowcase';
 import InstagramReels from './components/InstagramReels';
+import Features from './components/Features';
 import Pricing from './components/Pricing';
+import Reviews from './components/Reviews';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
+import ScrollToTop from './components/ScrollToTop';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -45,15 +48,18 @@ export default function App() {
   return (
     <>
       <CustomCursor />
+      <ScrollToTop />
       {loading && <Loader onComplete={handleLoaderComplete} />}
       <div
-        className={`transition-opacity duration-500 ${loading ? 'opacity-0' : 'opacity-100'}`}
+        className={`app-container ${loading ? 'loading' : 'loaded'}`}
       >
         <Navbar />
         <Hero />
         <YoutubeShowcase />
         <InstagramReels />
+        <Features />
         <Pricing />
+        <Reviews />
         <Footer />
       </div>
     </>

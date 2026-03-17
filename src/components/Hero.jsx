@@ -79,15 +79,11 @@ export default function Hero() {
   }, []);
 
   return (
-    <section
-      id="hero"
-      ref={heroRef}
-      className="relative min-h-screen flex items-center overflow-hidden pt-20"
-    >
+    <section id="hero" ref={heroRef} className="hero overflow-hidden">
       {/* Animated Background Orbs */}
       <div
         ref={orb1Ref}
-        className="hero-gradient-orb"
+        className="hero-orb"
         style={{
           width: '600px',
           height: '600px',
@@ -98,7 +94,7 @@ export default function Hero() {
       />
       <div
         ref={orb2Ref}
-        className="hero-gradient-orb"
+        className="hero-orb"
         style={{
           width: '500px',
           height: '500px',
@@ -109,7 +105,7 @@ export default function Hero() {
       />
       <div
         ref={orb3Ref}
-        className="hero-gradient-orb"
+        className="hero-orb"
         style={{
           width: '300px',
           height: '300px',
@@ -122,26 +118,27 @@ export default function Hero() {
 
       {/* Grid pattern overlay */}
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 z-0"
         style={{
+          opacity: 0.03,
           backgroundImage:
             'linear-gradient(rgba(163,35,136,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(163,35,136,0.3) 1px, transparent 1px)',
           backgroundSize: '60px 60px',
         }}
       />
 
-      <div className="max-w-6xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 items-center relative z-10">
+      <div className="container relative z-10 hero-grid">
         {/* Text Side */}
-        <div className="flex flex-col gap-6">
-          <div ref={titleRef} style={{ opacity: 0 }} className="max-w-xl">
-            <p className="text-sm font-medium text-[#A32388] tracking-widest uppercase mb-4">
+        <div>
+          <div ref={titleRef} style={{ opacity: 0 }}>
+            <p className="hero-tag">
               ✦ Creative Designer
             </p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] tracking-tight">
+            <h1 className="hero-title">
               Hey, I&apos;m{' '}
-              <span className="hero-title-gradient">Ali</span>
+              <span>Ali</span>
               <br />
-              <span className="text-3xl sm:text-4xl lg:text-5xl xl:text-5xl font-bold text-[#a0a0a0]">
+              <span className="hero-subtitle-text">
                 Thumbnail Designer
               </span>
             </h1>
@@ -149,38 +146,38 @@ export default function Hero() {
 
           <p
             ref={subtitleRef}
-            className="text-base sm:text-lg text-[#a0a0a0] max-w-lg leading-relaxed"
+            className="hero-description"
             style={{ opacity: 0 }}
           >
             I craft high-converting YouTube thumbnails & social media visuals that
             grab attention, boost click-through rates, and transform viewers into loyal subscribers.
           </p>
 
-          <div ref={ctaRef} className="flex flex-wrap gap-4 items-center" style={{ opacity: 0 }}>
+          <div ref={ctaRef} className="hero-ctas" style={{ opacity: 0 }}>
             <a
               href="https://wa.me/212777645270"
               target="_blank"
               rel="noopener noreferrer"
-              className="cta-btn flex items-center gap-2"
+              className="cta-main"
             >
               Order Now <ArrowRightIcon width={18} height={18} />
             </a>
             <a
               href="#youtube"
-              className="px-8 py-4 rounded-full border border-[rgba(163,35,136,0.3)] text-[#a0a0a0] hover:text-white hover:border-[#A32388] transition-all duration-300 text-sm font-medium"
+              className="cta-secondary text-center"
             >
               View Portfolio
             </a>
           </div>
 
-          <div ref={socialRef} className="flex gap-3 pt-2" style={{ opacity: 0 }}>
+          <div ref={socialRef} className="social-icons" style={{ opacity: 0 }}>
             <a
               href="https://x.com/LUFFNHOPSD"
               target="_blank"
               rel="noopener noreferrer"
               className="social-icon"
             >
-              <TwitterLogoIcon width={18} height={18} />
+              <TwitterLogoIcon width={20} height={20} />
             </a>
             <a
               href="https://www.instagram.com/luffnho.psd/"
@@ -188,7 +185,7 @@ export default function Hero() {
               rel="noopener noreferrer"
               className="social-icon"
             >
-              <InstagramLogoIcon width={18} height={18} />
+              <InstagramLogoIcon width={20} height={20} />
             </a>
             <a
               href="https://wa.me/212777645270"
@@ -196,27 +193,21 @@ export default function Hero() {
               rel="noopener noreferrer"
               className="social-icon"
             >
-              <ChatBubbleIcon width={18} height={18} />
+              <ChatBubbleIcon width={20} height={20} />
             </a>
           </div>
         </div>
 
         {/* Image Side */}
-        <div ref={imageRef} className="flex justify-center lg:justify-end" style={{ opacity: 0 }}>
-          <div className="relative">
-            {/* Glow ring behind image */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#A32388] to-[#c94ab0] opacity-20 blur-3xl scale-110" />
-            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-2 border-[rgba(163,35,136,0.3)] shadow-[0_0_60px_rgba(163,35,136,0.2)]">
-              <img
-                src="/mypic/m-pfp.jpg"
-                alt="Ali - Thumbnail Designer"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            {/* Floating badge */}
-            <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-[#A32388] to-[#c94ab0] text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg">
-              200+ Projects
-            </div>
+        <div ref={imageRef} className="hero-img-wrapper" style={{ opacity: 0 }}>
+          <div className="hero-img-glow" />
+          <img
+            src="/mypic/m-pfp.jpg"
+            alt="Ali"
+            className="hero-img"
+          />
+          <div className="hero-badge">
+            200+ Projects
           </div>
         </div>
       </div>

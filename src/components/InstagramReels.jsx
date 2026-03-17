@@ -38,7 +38,6 @@ const allImages = [
   '/instagrame/prof-r32.jpg',
 ];
 
-// Distribute images into columns evenly
 function splitIntoColumns(images, numCols) {
   const cols = Array.from({ length: numCols }, () => []);
   images.forEach((img, i) => {
@@ -54,7 +53,6 @@ function InstaColumn({ images, index, registerRef }) {
     registerRef(index, colRef.current);
   }, [index, registerRef]);
 
-  // Duplicate images for seamless loop
   const doubled = [...images, ...images];
 
   return (
@@ -64,7 +62,7 @@ function InstaColumn({ images, index, registerRef }) {
           <div key={imgIdx} className="insta-card">
             <img src={img} alt={`Instagram reel ${imgIdx + 1}`} loading="lazy" />
             <div className="insta-overlay">
-              <InstagramLogoIcon width={22} height={22} className="text-white" />
+              <InstagramLogoIcon width={24} height={24} style={{ color: 'white' }} />
             </div>
           </div>
         ))}
@@ -86,7 +84,6 @@ export default function InstagramReels() {
   };
 
   useEffect(() => {
-    // Heading reveal
     gsap.fromTo(
       headingRef.current,
       { y: 50, opacity: 0 },
@@ -102,7 +99,6 @@ export default function InstagramReels() {
       }
     );
 
-    // Small delay to let images load and measure heights
     const timer = setTimeout(() => {
       Object.entries(columnRefs.current).forEach(([idx, col]) => {
         if (!col) return;
@@ -131,14 +127,13 @@ export default function InstagramReels() {
   }, []);
 
   return (
-    <section id="instagram" ref={sectionRef} className="py-24 relative overflow-hidden">
-      {/* Background accent */}
+    <section id="instagram" ref={sectionRef} style={{ overflow: 'hidden' }}>
       <div
         className="absolute bottom-0 left-0 w-[500px] h-[500px] pointer-events-none"
         style={{ background: 'radial-gradient(circle, rgba(163,35,136,0.06), transparent)' }}
       />
 
-      <div ref={headingRef} className="text-center mb-14 px-6" style={{ opacity: 0 }}>
+      <div ref={headingRef} className="container" style={{ opacity: 0 }}>
         <h2 className="section-heading">
           Instagram <span>Reels</span>
         </h2>
@@ -148,7 +143,6 @@ export default function InstagramReels() {
         </p>
       </div>
 
-      {/* Grid Container */}
       <div className="insta-grid-container">
         <div className="insta-grid">
           {columns.map((colImages, colIdx) => (
@@ -161,7 +155,6 @@ export default function InstagramReels() {
           ))}
         </div>
 
-        {/* Top/Bottom gradient fades */}
         <div className="insta-fade-top" />
         <div className="insta-fade-bottom" />
       </div>

@@ -11,6 +11,7 @@ const navLinks = [
 
 export default function Navbar() {
   const navRef = useRef(null);
+  const menuRef = useRef(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -18,61 +19,94 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
     gsap.fromTo(
       navRef.current,
-      { y: -80, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out', delay: 2.5 }
+      { y: -100, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: 'expo.out', delay: 2.5 }
     );
   }, []);
+
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden';
+      gsap.to(menuRef.current, {
+        height: '100vh',
+        opacity: 1,
+        duration: 0.6,
+        ease: 'expo.out',
+      });
+      gsap.fromTo(
+        '.mobile-link',
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'power2.out', delay: 0.2 }
+      );
+    } else {
+      document.body.style.overflow = 'unset';
+      gsap.to(menuRef.current, {
+        height: 0,
+        opacity: 0,
+        duration: 0.5,
+        ease: 'expo.in',
+      });
+    }
+  }, [mobileOpen]);
 
   const handleClick = (e, href) => {
     e.preventDefault();
     setMobileOpen(false);
     const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (el) {
+      const offset = 80;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = el.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    }
   };
 
   return (
     <nav
       ref={navRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? 'nav-glass py-3' : 'py-5'
-      }`}
+      className={`navbar ${scrolled ? 'scrolled' : ''}`}
       style={{ opacity: 0 }}
     >
-      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
+      <div className="nav-container">
         {/* Logo */}
-        <a href="#hero" className="flex items-center gap-3 group">
+        <a href="#hero" className="flex items-center gap-3 relative z-110">
           <img
             src="/logo/m-logo-whaite.png"
             alt="Ali Logo"
-            className="h-9 transition-transform duration-300 group-hover:scale-110"
+            style={{ height: '50px', width: 'auto', objectFit: 'contain' }}
           />
         </a>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="nav-links">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
               onClick={(e) => handleClick(e, link.href)}
-              className="text-sm text-[#a0a0a0] hover:text-white transition-colors duration-300 relative group"
+              className="nav-link"
             >
               {link.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-[#A32388] to-[#c94ab0] group-hover:w-full transition-all duration-300" />
             </a>
           ))}
           <a
             href="https://wa.me/212777645270"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-semibold px-6 py-2.5 rounded-full bg-gradient-to-r from-[#A32388] to-[#c94ab0] text-white hover:shadow-[0_5px_25px_rgba(163,35,136,0.4)] transition-all duration-300 hover:-translate-y-0.5"
+            className="nav-btn"
           >
             Order Now
           </a>
@@ -80,39 +114,42 @@ export default function Navbar() {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-white p-2"
+          className="mobile-toggle"
           onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label="Toggle menu"
         >
-          {mobileOpen ? <Cross1Icon width={22} height={22} /> : <HamburgerMenuIcon width={22} height={22} />}
+          {mobileOpen ? (
+            <Cross1Icon width={24} height={24} />
+          ) : (
+            <HamburgerMenuIcon width={24} height={24} />
+          )}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       <div
-        className={`md:hidden absolute top-full left-0 right-0 nav-glass overflow-hidden transition-all duration-500 ${
-          mobileOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
-        }`}
+        ref={menuRef}
+        className="mobile-menu"
       >
-        <div className="px-6 py-6 flex flex-col gap-4">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              onClick={(e) => handleClick(e, link.href)}
-              className="text-sm text-[#a0a0a0] hover:text-white transition-colors py-2"
-            >
-              {link.label}
-            </a>
-          ))}
+        {navLinks.map((link) => (
           <a
-            href="https://wa.me/212777645270"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm font-semibold px-6 py-3 rounded-full bg-gradient-to-r from-[#A32388] to-[#c94ab0] text-white text-center"
+            key={link.label}
+            href={link.href}
+            onClick={(e) => handleClick(e, link.href)}
+            className="mobile-link"
           >
-            Order Now
+            {link.label}
           </a>
-        </div>
+        ))}
+        <a
+          href="https://wa.me/212777645270"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="nav-btn"
+          style={{ fontSize: '1.25rem', padding: '16px 48px' }}
+        >
+          Order Now
+        </a>
       </div>
     </nav>
   );

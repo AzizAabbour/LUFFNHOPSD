@@ -16,7 +16,7 @@ const packages = [
     price: '$80',
     features: ['5 Thumbnails', 'High Quality Design', 'Source Files', '2 Revisions'],
     featured: false,
-    btnStyle: 'pricing-btn-outline',
+    btnStyle: 'btn-outline',
     message: encodeURIComponent(
       'Hello, I want to order the Standard Package (5 Thumbnails - $80)'
     ),
@@ -33,7 +33,7 @@ const packages = [
       '3 Revisions',
     ],
     featured: true,
-    btnStyle: 'pricing-btn-primary',
+    btnStyle: 'btn-primary',
     badge: 'Most Popular',
     message: encodeURIComponent(
       'Hello, I want to order the Premium Package (10 Thumbnails - $150)'
@@ -52,7 +52,7 @@ const packages = [
       'Unlimited Revisions',
     ],
     featured: false,
-    btnStyle: 'pricing-btn-outline',
+    btnStyle: 'btn-outline',
     message: encodeURIComponent(
       'Hello, I want to order the Premium Plus Package (10 Thumbnails + A/B Version - $200)'
     ),
@@ -102,11 +102,10 @@ export default function Pricing() {
   }, []);
 
   return (
-    <section id="pricing" ref={sectionRef} className="py-24 relative">
-      {/* Background accent */}
+    <section id="pricing" ref={sectionRef}>
       <div className="absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(163,35,136,0.06), transparent)' }} />
 
-      <div ref={headingRef} className="text-center mb-16 px-6" style={{ opacity: 0 }}>
+      <div ref={headingRef} className="container" style={{ opacity: 0 }}>
         <h2 className="section-heading">
           Choose Your <span>Package</span>
         </h2>
@@ -116,53 +115,42 @@ export default function Pricing() {
         </p>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+      <div className="pricing-grid">
         {packages.map((pkg, i) => (
           <div
             key={pkg.name}
             ref={(el) => (cardsRef.current[i] = el)}
-            className={`pricing-card flex flex-col ${pkg.featured ? 'featured' : ''}`}
+            className={`pricing-card ${pkg.featured ? 'featured' : ''}`}
             style={{ opacity: 0 }}
           >
-            {/* Badge */}
             {pkg.badge && (
-              <div className="absolute top-0 right-6 -translate-y-1/2">
-                <div className="bg-gradient-to-r from-[#A32388] to-[#c94ab0] text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg">
-                  {pkg.badge}
-                </div>
+              <div className="pricing-badge">
+                {pkg.badge}
               </div>
             )}
 
-            {/* Icon */}
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[rgba(163,35,136,0.2)] to-[rgba(163,35,136,0.05)] flex items-center justify-center text-[#A32388] mb-6">
+            <div className="pricing-icon">
               {pkg.icon}
             </div>
 
-            {/* Name */}
-            <h3 className="text-xl font-bold mb-2">{pkg.name}</h3>
+            <h3 className="pricing-title">{pkg.name}</h3>
 
-            {/* Price */}
-            <div className="flex items-baseline gap-1 mb-6">
-              <span className="text-4xl font-extrabold bg-gradient-to-r from-white to-[#a0a0a0] bg-clip-text text-transparent">
-                {pkg.price}
-              </span>
-              <span className="text-sm text-[#a0a0a0]">/package</span>
+            <div className="pricing-price">
+              {pkg.price}
+              <span>/package</span>
             </div>
 
-            {/* Divider */}
-            <div className="h-px bg-gradient-to-r from-transparent via-[rgba(163,35,136,0.2)] to-transparent mb-6" />
+            <div className="pricing-divider" />
 
-            {/* Features */}
-            <ul className="flex flex-col gap-3 mb-8 flex-1">
+            <ul className="pricing-features">
               {pkg.features.map((feat) => (
-                <li key={feat} className="flex items-center gap-3 text-sm text-[#a0a0a0]">
-                  <CheckCircledIcon width={16} height={16} className="text-[#A32388] flex-shrink-0" />
+                <li key={feat} className="pricing-feature">
+                  <CheckCircledIcon width={16} height={16} />
                   {feat}
                 </li>
               ))}
             </ul>
 
-            {/* Button */}
             <a
               href={`https://wa.me/212777645270?text=${pkg.message}`}
               target="_blank"

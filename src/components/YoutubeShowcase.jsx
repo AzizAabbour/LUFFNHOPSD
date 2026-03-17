@@ -63,27 +63,29 @@ export default function YoutubeShowcase() {
 
     // Carousel 1: Right to Left
     const track1 = row1Ref.current;
-    const totalWidth1 = track1.scrollWidth / 2;
-
-    gsap.set(track1, { x: 0 });
-    anim1.current = gsap.to(track1, {
-      x: -totalWidth1,
-      duration: 50,
-      ease: 'none',
-      repeat: -1,
-    });
+    if (track1) {
+      const totalWidth1 = track1.scrollWidth / 2;
+      gsap.set(track1, { x: 0 });
+      anim1.current = gsap.to(track1, {
+        x: -totalWidth1,
+        duration: 50,
+        ease: 'none',
+        repeat: -1,
+      });
+    }
 
     // Carousel 2: Left to Right
     const track2 = row2Ref.current;
-    const totalWidth2 = track2.scrollWidth / 2;
-
-    gsap.set(track2, { x: -totalWidth2 });
-    anim2.current = gsap.to(track2, {
-      x: 0,
-      duration: 55,
-      ease: 'none',
-      repeat: -1,
-    });
+    if (track2) {
+      const totalWidth2 = track2.scrollWidth / 2;
+      gsap.set(track2, { x: -totalWidth2 });
+      anim2.current = gsap.to(track2, {
+        x: 0,
+        duration: 55,
+        ease: 'none',
+        repeat: -1,
+      });
+    }
 
     return () => {
       anim1.current?.kill();
@@ -117,16 +119,14 @@ export default function YoutubeShowcase() {
     }
   };
 
-  // Duplicate images for seamless loop
   const doubledRow1 = [...row1Images, ...row1Images];
   const doubledRow2 = [...row2Images, ...row2Images];
 
   return (
-    <section id="youtube" ref={sectionRef} className="py-24 relative overflow-hidden">
-      {/* Background accent */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(163,35,136,0.06), transparent)' }} />
+    <section id="youtube" ref={sectionRef} style={{ overflow: 'hidden' }}>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style={{ width: '600px', height: '600px', pointerEvents: 'none', background: 'radial-gradient(circle, rgba(163,35,136,0.06), transparent)', transform: 'translate(-50%, -50%)' }} />
 
-      <div ref={headingRef} className="text-center mb-14 px-6" style={{ opacity: 0 }}>
+      <div ref={headingRef} className="container" style={{ opacity: 0 }}>
         <h2 className="section-heading">
           YouTube <span>Thumbnails</span>
         </h2>
@@ -136,9 +136,8 @@ export default function YoutubeShowcase() {
         </p>
       </div>
 
-      {/* Carousel 1 - Right to Left */}
       <div
-        className="mb-6 overflow-hidden"
+        className="carousel-container"
         onMouseEnter={handleMouseEnter1}
         onMouseLeave={handleMouseLeave1}
       >
@@ -152,9 +151,8 @@ export default function YoutubeShowcase() {
         </div>
       </div>
 
-      {/* Carousel 2 - Left to Right */}
       <div
-        className="overflow-hidden"
+        className="carousel-container"
         onMouseEnter={handleMouseEnter2}
         onMouseLeave={handleMouseLeave2}
       >
